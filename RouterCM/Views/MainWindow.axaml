@@ -1,0 +1,272 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="RouterCM.Views.MainWindow"
+		xmlns:models="clr-namespace:RouterCM.Models;assembly=RouterCM"
+        xmlns:vm="using:RouterCM.ViewModels"
+		x:DataType="vm:MainWindowViewModel"
+        Title="仿布局示例"
+        Width="1280"
+        Height="800"
+		Icon="/Assets/app.ico">
+	<DockPanel>
+		 <!--顶部菜单栏--> 
+		<Menu DockPanel.Dock="Top" Background="#F0F0F0">
+			<MenuItem Header="文件">
+				<MenuItem Header="新建" />
+				<MenuItem Header="打开" />
+				<MenuItem Header="保存" />
+				<MenuItem Header="另存为" />
+				<MenuItem Header="退出" />
+			</MenuItem>
+			<MenuItem Header="模板">
+				<MenuItem Header="设备模板" />
+				<MenuItem Header="规约模板" />
+			</MenuItem>
+			<MenuItem Header="设备管理">
+				<MenuItem Header="通信设置" />
+				<MenuItem Header="开始监视" />
+				<MenuItem Header="停止监视" />
+				<Separator Height="1" Background="Gray" Margin="0"/>
+				<MenuItem Header="更新配置" />
+				<MenuItem Header="管理文件" />
+				<MenuItem Header="读取工程" />
+				<MenuItem Header="设置时钟" />
+				<MenuItem Header="显示日志" />
+				<MenuItem Header="告警日志" />
+				<MenuItem Header="流量历史数据" />
+				<Separator Height="1" Background="Gray" Margin="0"/>
+				<MenuItem Header="导入升级包" />
+				<MenuItem Header="本地升级" />
+				<MenuItem Header="重新启动" />
+				<MenuItem Header="恢复出厂设置" />
+			</MenuItem>
+			<MenuItem Header="远程维护">
+				<MenuItem Header="远程配置" />
+				<MenuItem Header="可控设备集" />
+				<MenuItem Header="登陆退出" />
+				<MenuItem Header="增加可控设备" />
+			</MenuItem>
+			<MenuItem Header="工具">
+				<MenuItem Header="PUTTY" />
+				<MenuItem Header="FTP" />
+				<MenuItem Header="局域网扫描" />
+				<MenuItem Header="能耗标准化工具" />
+				<MenuItem Header="串口发包工具" />
+			</MenuItem>
+			<MenuItem Header="帮助">
+				<MenuItem Header="操作说明书">
+					<MenuItem Header="软件操作说明书" />
+					<Separator Height="1" Background="Gray" Margin="0"/>
+					<MenuItem Header="通用型串口DLT645采集侧主节点规约配置说明V1.0" />
+					<MenuItem Header="通用型串口DLT645-07设备侧主节点规约配置说明V1.0" />
+					<MenuItem Header="通用型串口DLT645-97设备侧主节点规约配置说明V1.0" />
+					<MenuItem Header="通用型串口Modbus设备侧主节点规约配置说明V1.0" />
+					<MenuItem Header="通用型以太网Modbustcp设备侧客户端规约配置说明V1.0" />
+					<MenuItem Header="通用型以太网Modbustcp主站侧单服务端口规约配置说明V1.0" />
+					<MenuItem Header="自定义以太网IEC104主站侧服务端规约配置说明V1.0" />
+					<MenuItem Header="自定义以太网IEC104设备侧客户端规约配置说明V1.0" />
+				</MenuItem>
+				<MenuItem Header="关于管理软件" />
+				<MenuItem Header="设置" />
+				<MenuItem Header="检查新程序" />
+				<MenuItem Header="锁定程序" />
+			</MenuItem>
+		</Menu>
+
+		 <!--分割线--> 
+		<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
+
+		 <!--模拟工具栏--> 
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#E0E0E0" Height="40">
+
+			 <!--按钮-新建工程--> 
+			<Button Background="#00000000" ToolTip.Tip="新建工程">
+				<Image Source="/Assets/new_project.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <!--按钮-打开文件--> 
+			<Button Background="#00000000" ToolTip.Tip="打开文件">
+				<Image Source="/Assets/open_file.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <!--按钮-保存文件--> 
+			<Button Background="#00000000" ToolTip.Tip="保存文件">
+				<Image Source="/Assets/save.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
+
+			 <!--按钮-规约模板--> 
+			<Button Background="#00000000" ToolTip.Tip="规约模板">
+				<Image Source="/Assets/protocol.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <!--按钮-设备模板--> 
+			<Button Background="#00000000" ToolTip.Tip="设备模板">
+				<Image Source="/Assets/device.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
+
+
+			 <!--按钮-通信设置--> 
+			<Button Background="#00000000" ToolTip.Tip="通信设置">
+				<Image Source="/Assets/communication.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <!--按钮-监视--> 
+			<Button Background="#00000000" ToolTip.Tip="监视">
+				<Image Source="/Assets/monitor.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <!--按钮-管理文件--> 
+			<Button Background="#00000000" ToolTip.Tip="管理文件">
+				<Image Source="/Assets/file_manage.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <!--按钮-重新启动--> 
+			<Button Background="#00000000" ToolTip.Tip="重新启动">
+				<Image Source="/Assets/reboot.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
+
+
+			 <!--按钮-PUTTY--> 
+			<Button Background="#00000000" ToolTip.Tip="PUTTY">
+				<Image Source="/Assets/putty.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <!--按钮-FTP--> 
+			<Button Background="#00000000" ToolTip.Tip="FTP">
+				<Image Source="/Assets/ftp.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <Border Width="2" Background="Gray" Margin="5,5,5,5" Height="25"/>
+
+			 <!--按钮-操作说明书--> 
+			<Button Background="#00000000" ToolTip.Tip="操作说明书">
+				<Image Source="/Assets/guidebook.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+
+			 <!--按钮-About--> 
+			<Button Background="#00000000" ToolTip.Tip="关于">
+				<Image Source="/Assets/about.ico" Width="30" Height="30" Margin="5,5,5,5" />
+			</Button>
+		</StackPanel>
+
+		 <!--分割线--> 
+		<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
+
+		 <!--模拟状态栏--> 
+		<Border DockPanel.Dock="Bottom" Background="#E0E0E0" Height="30">
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+				<TextBlock Text="状态: 准备就绪" Margin="5,0" VerticalAlignment="Center" />
+				<TextBlock Text=" | 时间: 2025-01-03 16:51:27" Margin="5,0" VerticalAlignment="Center" />
+			</StackPanel>
+		</Border>
+
+		 <!--主内容区--> 
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="250" />
+				 <!--左侧导航栏--> 
+				<ColumnDefinition Width="*" />
+				 <!--右侧内容区域--> 
+			</Grid.ColumnDefinitions>
+
+			
+			 <!--左侧导航栏--> 
+			<Border Background="#F0F0F0" Grid.Column="0">
+				<TreeView  ItemsSource="{Binding NavItems}">
+					<TreeView.ItemTemplate>
+
+						<TreeDataTemplate   DataType="{x:Type vm:NavItem}" ItemsSource="{Binding Children}">
+							<WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+
+								<TextBlock Text="{Binding name}">
+									<TextBlock.ContextMenu>
+										<ContextMenu>
+											<MenuItem Header="新建" />
+											<MenuItem Header="删除" />
+											<MenuItem Header="移动" />
+											<MenuItem Header="重命名" />
+											<MenuItem Header="另存为" />
+											<MenuItem Header="打开文件位置" />
+											<MenuItem Header="更新服务器位置" />
+										</ContextMenu>
+									</TextBlock.ContextMenu>
+									</TextBlock>
+								<!--<CheckBox Content="{Binding name}" FontSize="14" FontFamily="微软雅黑" Tag="{Binding Children}" IsChecked="{Binding IsSelected}" Foreground="{Binding ForegroundBrush}" Unchecked="ck_Unchecked" Checked="ck_Checked"></CheckBox>-->
+								</WrapPanel> 
+								</TreeDataTemplate >
+						
+						</TreeView.ItemTemplate>
+					<!--<TreeView.DataTemplates>
+						<TreeDataTemplate DataType="models:NavItem" ItemsSource="{Binding Children}">
+							<TextBlock Foreground="Red" Text="{Binding name}" />
+						</TreeDataTemplate>
+						<DataTemplate DataType="models:NavItem">
+							<TextBlock Text="{Binding name}" />
+						</DataTemplate>
+					</TreeView.DataTemplates>-->
+				</TreeView>
+
+			</Border>
+
+			 <!--右侧内容区域--> 
+			<Border Background="#FFFFFF" Grid.Column="1">
+				<StackPanel >
+				<TextBlock Text =" 多功能仪表（PM）的数据列表" />
+				<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
+
+					<TabControl Margin="5">
+						<TabItem Header="遥测">
+						</TabItem>
+						<TabItem Header="遥信">
+						</TabItem>
+						<TabItem Header="遥脉">
+						</TabItem>
+						<TabItem Header="遥控">
+						</TabItem>
+						<TabItem Header="遥调">
+						</TabItem>
+					</TabControl>
+					<TreeDataGrid Source="{Binding Source}"/>
+
+				</StackPanel>
+			</Border>
+		</Grid>
+
+	</DockPanel>
+
+
+	<!--<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:RouterCM.ViewModels;"
+		xmlns:models="using:RouterCM.Models;"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+        Width="600" Height="450"
+        x:Class="RouterCM.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="TreeViewTutorial">-->
+
+		<!--<Design.DataContext>
+		<vm:MainWindowViewModel />
+		</Design.DataContext>
+
+	<TreeView ItemsSource="{Binding ProjectGroup}"/>
+		--><!--<TreeDataGrid Source="{Binding Source}"/>--><!--
+
+</Window>-->
+
+<!--<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:RouterCM.ViewModels"
+		x:DataType="vm:MainWindowViewModel"
+        x:Class="RouterCM.Views.MainWindow">-->
+
+
+</Window>
