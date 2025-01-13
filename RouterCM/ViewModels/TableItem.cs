@@ -19,7 +19,7 @@ namespace RouterCM.ViewModels
         DEV
 
     };
-    public class TableItem
+    public class TableItemYC
     {
         public string id { get; set; } = "1";
         public string name { get; set; } = "Ua";
@@ -39,8 +39,8 @@ namespace RouterCM.ViewModels
         public int code { get; set; } = 3;
         public int addr_bias { get; set; } = 0;
         public TableItemType ctrl_type = TableItemType.UNKNOWN;
-        public TableItem() { }
-        public TableItem(
+        public TableItemYC() { }
+        public TableItemYC(
 string _id,
 string _name,
 string _val_type,

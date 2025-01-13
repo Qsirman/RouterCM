@@ -4,11 +4,18 @@
 		xmlns:models="clr-namespace:RouterCM.Models;assembly=RouterCM"
         xmlns:vm="using:RouterCM.ViewModels"
 		x:DataType="vm:MainWindowViewModel"
-        Title="仿布局示例"
+        Title="RouterCM"
         Width="1280"
         Height="800"
 		Icon="/Assets/app.ico">
-	<DockPanel>
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainViewModel />
+	</Design.DataContext>
+	
+	<DockPanel x:Name="Root">
 		 <!--顶部菜单栏--> 
 		<Menu DockPanel.Dock="Top" Background="#F0F0F0">
 			<MenuItem Header="文件">
@@ -217,56 +224,30 @@
 			 <!--右侧内容区域--> 
 			<Border Background="#FFFFFF" Grid.Column="1">
 				<StackPanel >
-				<TextBlock Text =" 多功能仪表（PM）的数据列表" />
+				<TextBlock Text ="{Binding TableTitle, Mode=TwoWay}" />
 				<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
 
-					<TabControl Margin="5">
-						<TabItem Header="遥测">
+					<TabControl Margin="5" Name="tabcontrol" ItemsSource="{Binding tabitems}" SelectionChanged = "_parentTabControl_SelectionChanged">
+						<!--<TabItem Header="遥测">
+							<TreeDataGrid Source="{Binding Source}"/>
 						</TabItem>
 						<TabItem Header="遥信">
 						</TabItem>
 						<TabItem Header="遥脉">
+							<TreeDataGrid Source="{Binding Source}"/>
 						</TabItem>
 						<TabItem Header="遥控">
+							<TreeDataGrid Source="{Binding Source}"/>
 						</TabItem>
 						<TabItem Header="遥调">
-						</TabItem>
+							<TreeDataGrid Source="{Binding Source}"/>
+						</TabItem>-->
 					</TabControl>
+					<!--<Button Click="on_click_test">测试按钮</Button>-->
 					<TreeDataGrid Source="{Binding Source}"/>
-
 				</StackPanel>
 			</Border>
 		</Grid>
 
 	</DockPanel>
-
-
-	<!--<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:RouterCM.ViewModels;"
-		xmlns:models="using:RouterCM.Models;"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
-        Width="600" Height="450"
-        x:Class="RouterCM.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="TreeViewTutorial">-->
-
-		<!--<Design.DataContext>
-		<vm:MainWindowViewModel />
-		</Design.DataContext>
-
-	<TreeView ItemsSource="{Binding ProjectGroup}"/>
-		--><!--<TreeDataGrid Source="{Binding Source}"/>--><!--
-
-</Window>-->
-
-<!--<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:RouterCM.ViewModels"
-		x:DataType="vm:MainWindowViewModel"
-        x:Class="RouterCM.Views.MainWindow">-->
-
-
 </Window>
