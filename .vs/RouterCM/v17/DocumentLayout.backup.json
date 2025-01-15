@@ -1,26 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\1.projects\\router\\GuiConf\\RouterCM\\",
+  "WorkspaceRootPath": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|d:\\1.projects\\router\\guiconf\\routercm\\routercm\\views\\mainwindow.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}",
-      "RelativeMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|solutionrelative:routercm\\views\\mainwindow.axaml||{6D5344A2-2FCD-49DE-A09D-6A14FD1B1224}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|d:\\1.projects\\router\\guiconf\\routercm\\routercm\\views\\mainwindow.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|c:\\users\\10642\\1.projects\\guiconf\\routercm\\routercm\\views\\mainwindow.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|solutionrelative:routercm\\views\\mainwindow.axaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|d:\\1.projects\\router\\guiconf\\routercm\\routercm\\viewmodels\\projectexplorer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|solutionrelative:routercm\\viewmodels\\projectexplorer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|c:\\users\\10642\\1.projects\\guiconf\\routercm\\routercm\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|solutionrelative:routercm\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|d:\\1.projects\\router\\guiconf\\routercm\\routercm\\viewmodels\\tableitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|c:\\users\\10642\\1.projects\\guiconf\\routercm\\routercm\\viewmodels\\tableitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|solutionrelative:routercm\\viewmodels\\tableitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|d:\\1.projects\\router\\guiconf\\routercm\\routercm\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|solutionrelative:routercm\\viewmodels\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|c:\\users\\10642\\1.projects\\guiconf\\routercm\\routercm\\viewmodels\\projectexplorer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|solutionrelative:routercm\\viewmodels\\projectexplorer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|c:\\users\\10642\\1.projects\\guiconf\\routercm\\routercm\\views\\mainwindow.axaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{8CD5FAE6-6D24-40AD-986B-C12CCA89EEB7}|RouterCM\\RouterCM.csproj|solutionrelative:routercm\\views\\mainwindow.axaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,76 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
+              "Title": "MainWindow.axaml",
+              "DocumentMoniker": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\Views\\MainWindow.axaml",
+              "RelativeDocumentMoniker": "RouterCM\\Views\\MainWindow.axaml",
+              "ToolTip": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\Views\\MainWindow.axaml",
+              "RelativeToolTip": "RouterCM\\Views\\MainWindow.axaml",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAAAC4BAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-15T15:27:46.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "MainWindow.axaml.cs",
-              "DocumentMoniker": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\Views\\MainWindow.axaml.cs",
+              "DocumentMoniker": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\Views\\MainWindow.axaml.cs",
               "RelativeDocumentMoniker": "RouterCM\\Views\\MainWindow.axaml.cs",
-              "ToolTip": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\Views\\MainWindow.axaml.cs",
+              "ToolTip": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\Views\\MainWindow.axaml.cs",
               "RelativeToolTip": "RouterCM\\Views\\MainWindow.axaml.cs",
-              "ViewState": "AgIAAPUAAAAAAAAAAAAiwPoAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAHwAAAAAAAAAAADwv5AAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-15T09:01:02.687Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "TableItem.cs",
-              "DocumentMoniker": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\TableItem.cs",
+              "DocumentMoniker": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\TableItem.cs",
               "RelativeDocumentMoniker": "RouterCM\\ViewModels\\TableItem.cs",
-              "ToolTip": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\TableItem.cs",
+              "ToolTip": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\TableItem.cs",
               "RelativeToolTip": "RouterCM\\ViewModels\\TableItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBQAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-15T08:53:49.038Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ProjectExplorer.cs",
-              "DocumentMoniker": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\ProjectExplorer.cs",
+              "DocumentMoniker": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\ProjectExplorer.cs",
               "RelativeDocumentMoniker": "RouterCM\\ViewModels\\ProjectExplorer.cs",
-              "ToolTip": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\ProjectExplorer.cs",
+              "ToolTip": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\ProjectExplorer.cs",
               "RelativeToolTip": "RouterCM\\ViewModels\\ProjectExplorer.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAA3wD8AAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAiwBcAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-14T07:31:40.874Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "MainWindowViewModel.cs",
-              "DocumentMoniker": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\MainWindowViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\MainWindowViewModel.cs",
               "RelativeDocumentMoniker": "RouterCM\\ViewModels\\MainWindowViewModel.cs",
-              "ToolTip": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\MainWindowViewModel.cs",
+              "ToolTip": "C:\\Users\\10642\\1.projects\\GuiConf\\RouterCM\\RouterCM\\ViewModels\\MainWindowViewModel.cs",
               "RelativeToolTip": "RouterCM\\ViewModels\\MainWindowViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAwGIAAABpAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-14T07:23:02.17Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.axaml",
-              "DocumentMoniker": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\Views\\MainWindow.axaml",
-              "RelativeDocumentMoniker": "RouterCM\\Views\\MainWindow.axaml",
-              "ToolTip": "D:\\1.projects\\router\\GuiConf\\RouterCM\\RouterCM\\Views\\MainWindow.axaml",
-              "RelativeToolTip": "RouterCM\\Views\\MainWindow.axaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-01-15T04:06:52.638Z",
               "EditorCaption": ""
             }
           ]

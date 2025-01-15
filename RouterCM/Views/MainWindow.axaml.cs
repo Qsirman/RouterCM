@@ -10,19 +10,31 @@ using Avalonia.Controls.Models.TreeDataGrid;
 using Avalonia.Controls.Primitives;
 using Avalonia.Platform.Storage;
 using System.IO;
+using Avalonia.Controls.Selection;
+using Avalonia.Media;
 
 namespace RouterCM.Views
 {
     public partial class MainWindow : Window
     {
 
-        private MainWindowViewModel viewModel { get; set; }
-        private TabControl tabControl;
+        private MainWindowViewModel _ViewModel { get; set; }
+        private MainWindowViewModel ViewModel
+        { 
+            get { 
+                if (_ViewModel == null) {
+                    _ViewModel = (MainWindowViewModel)DataContext;
+                }
+                return _ViewModel;
+            }
+            set { _ViewModel = value; } 
+        }
+
+
+        private TabControl tabControl { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-
-            viewModel = (MainWindowViewModel)DataContext;
 
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.Items.Add("复制");
@@ -50,11 +62,12 @@ namespace RouterCM.Views
 
             if (files.Count >= 1)
             {
-                // 打开第一个文件的读取流。
-                await using var stream = await files[0].OpenReadAsync();
-                using var streamReader = new StreamReader(stream);
-                // 将文件的所有内容作为文本读取。
-                var fileContent = await streamReader.ReadToEndAsync();
+                ViewModel.PrjCfgFile = files[0];
+                //// 打开第一个文件的读取流。
+                //await using var stream = await files[0].OpenReadAsync();
+                //using var streamReader = new StreamReader(stream);
+                //// 将文件的所有内容作为文本读取。
+                //var fileContent = await streamReader.ReadToEndAsync();
             }
         }
 
@@ -118,16 +131,19 @@ namespace RouterCM.Views
         private async void TabCtrlSelectChanged(object sender, SelectionChangedEventArgs e)
         {
             TabStrip tabcontrol = this.FindControl<TabStrip>("TabDataCatChoose");
-            viewModel = (MainWindowViewModel)DataContext;
-            viewModel.TableTitle = tabcontrol.SelectedIndex.ToString();
+            ViewModel.TableTitle = tabcontrol.SelectedIndex.ToString();
             switch (tabcontrol.SelectedIndex)
             {
                 case 0:
                     {
-                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
+                        ViewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem(), new TableItem() })
                         {
                             Columns = {
-                                new TextColumn<TableItem, int>("ID", x => x.id),
+                                new TextColumn<TableItem, int>("ID", x => x.id,(r, v) => r.id = v,options: new TextColumnOptions<TableItem>(){
+                                    TextWrapping = TextWrapping.Wrap,
+                                    TextAlignment = TextAlignment.Left,
+                                    BeginEditGestures = BeginEditGestures.DoubleTap
+                                },width:GridLength.Auto),
                                 new TextColumn<TableItem, string>("名称", x => x.args["Name"]),
                                 new TextColumn<TableItem, string>("类型", x => x.args["Type"]),
                                 new TextColumn<TableItem, string>("单位",x => x.args["Unit"]),
@@ -146,12 +162,16 @@ namespace RouterCM.Views
                                 new TextColumn<TableItem, string>("偏移地址", x => x.args["AddrBias"]),
                             }
                         };
+
+                        //ViewModel.Source.RowSelection!.SingleSelect = false;
+
+                        ViewModel.Source.Selection = new TreeDataGridCellSelectionModel<TableItem>(ViewModel.Source);
                         break;
                     }
                 case 1:
                     {
 
-                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
+                        ViewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
                         {
                             Columns =
                             {
@@ -172,7 +192,7 @@ namespace RouterCM.Views
                 case 2:
                     {
 
-                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
+                        ViewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
                         {
                             Columns =
                             {
@@ -200,7 +220,7 @@ namespace RouterCM.Views
                 case 3:
                     {
 
-                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
+                        ViewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
                         {
                             Columns =
                             {
@@ -223,7 +243,7 @@ namespace RouterCM.Views
                 case 4:
                     {
 
-                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
+                        ViewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
                         {
                             Columns =
                             {

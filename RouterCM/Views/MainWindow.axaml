@@ -15,8 +15,63 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<vm:MainViewModel />
 	</Design.DataContext>
+
+	<Window.Resources>
+		<StreamGeometry x:Key="TreeViewItemCollapsedChevronPathData">M 0,0 3,3 0,6 Z</StreamGeometry>
+		<StreamGeometry x:Key="TreeViewItemExpandedChevronPathData">M 0,0 6,0 3,3 Z</StreamGeometry>
+	</Window.Resources>
 	
-	<DockPanel x:Name="Root">
+	<Window.Styles>
+
+		<Style Selector="TabStrip">
+			<!--<Setter Property="MaxHeight" Value="15"/>-->
+			<!--<Setter Property="Margin" Value="0,0,0,0"/>-->
+			<!--<Setter Property="Padding" Value="0,0,0,0"/>-->
+		</Style>
+
+		<Style Selector="TabStripItem">
+			<Setter Property="Foreground" Value="Black"/>
+			<Setter Property="FontSize" Value="12"/>
+			<!--<Setter Property="Margin" Value="0,0,0,0"/>-->
+			<!--<Setter Property="Padding" Value="0,0,0,0"/>-->
+			<!--<Setter Property="BorderThickness" Value="1,1,1,1"/>-->
+			<!--<Setter Property="BorderBrush" Value="Black"/>-->
+			
+			<!--<Style Selector="^:pointerover /template/ ContentPresenter">
+				<Setter Property="Background" Value="Gray"/>
+			</Style>
+			<Style Selector="^:selected /template/ ContentPresenter">
+				<Setter Property="Background" Value="Gray"/>
+			</Style>-->
+
+			<!--<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="0 0 0 0"/>
+			<Setter Property="Padding" Value="0 0"/>
+			<Setter Property="BorderThickness" Value="0 0 0 0"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>-->
+		</Style>
+
+		<Style Selector="ToggleButton:checked /template/ Path#ChevronPath">
+			<Setter Property="Data" Value="{StaticResource TreeViewItemExpandedChevronPathData}" />
+		</Style>
+		<Style Selector="ToggleButton:unchecked /template/ Path#ChevronPath">
+			<Setter Property="Data" Value="{StaticResource TreeViewItemCollapsedChevronPathData}" />
+		</Style>
+		<Style Selector="TreeViewItem">
+			<Setter Property="FontSize" Value="12"/>
+			<Setter Property="MinHeight" Value="15"></Setter>
+			<Setter Property="Margin" Value="0,0,0,0"/>
+			<Setter Property="Padding" Value="0,0,0,0"/>
+		</Style>
+			<!--<Style Selector="TreeViewItem /template/ ToggleButton#PART_ExpandCollapseChevron">
+			<Setter Property="Width" Value="15"></Setter>
+			<Setter Property="Height" Value="15"></Setter>
+		</Style>-->
+		
+	</Window.Styles>
+
+			<DockPanel x:Name="Root">
 		 <!--顶部菜单栏--> 
 		<Menu DockPanel.Dock="Top" Background="#F0F0F0">
 			<MenuItem Header="文件">
@@ -177,20 +232,28 @@
 		 <!--主内容区--> 
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="250" />
+				<ColumnDefinition Width="Auto" />
 				 <!--左侧导航栏--> 
-				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
 				 <!--右侧内容区域--> 
 			</Grid.ColumnDefinitions>
 	
 			 <!--左侧导航栏--> 
-			<Border Background="#F0F0F0" Grid.Column="0">
-				<StackPanel >
-					<TreeView ItemsSource="{Binding project_explorer.project_groups}" Tapped="myTextBlock_Tap">
+			<Border Background="#F0F0F0" Grid.Column="0" >
+				<Grid >
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<TreeView ItemsSource="{Binding project_explorer.Items}" SelectedItem="{Binding ExplorerItemSelected}">
 						<TreeView.DataTemplates>
 
-							<TreeDataTemplate   DataType="{x:Type vm:ProjectGroup}" ItemsSource="{Binding projects}">
-								<TextBlock Text="{Binding name}" Width="2000">
+							<TreeDataTemplate   DataType="{x:Type vm:ExplorerItem}" ItemsSource="{Binding Children}">
+								<TextBlock Text="{Binding Name}"/>
+							</TreeDataTemplate >
+							
+							<!--<TreeDataTemplate   DataType="{x:Type vm:ProjectGroup}" ItemsSource="{Binding projects}">
+								<TextBlock Text="{Binding name}">
 									<TextBlock.ContextMenu>
 										<ContextMenu>
 											<MenuItem Header="新建" />
@@ -223,12 +286,12 @@
 
 							<TreeDataTemplate   DataType="{x:Type vm:Dev}">
 								<TextBlock Text="{Binding name}"/>
-							</TreeDataTemplate >
+							</TreeDataTemplate >-->
 
 						</TreeView.DataTemplates>
 					</TreeView>
-					<!--<TabStrip  Margin="5" ItemsSource="{Binding tabitems2}" FontSize="1"/>-->
-				</StackPanel>
+						<TabStrip  Grid.Row="1" ItemsSource="{Binding NavTabiIems}"/>
+				</Grid>
 			</Border>
 
 			 <!--右侧内容区域--> 
@@ -237,7 +300,16 @@
 					<TextBlock Text ="{Binding TableTitle, Mode=TwoWay}" />
 					<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
 					<TabStrip  Margin="5" Name="TabDataCatChoose" ItemsSource="{Binding TableTabItems}" SelectionChanged = "TabCtrlSelectChanged"/>
-					<TreeDataGrid Source="{Binding Source}"/>
+					<TreeDataGrid Source="{Binding Source}" CanUserResizeColumns="true" CanUserSortColumns="false">
+						<!--<TreeDataGrid.Resources>
+
+							--><!-- Defines a named template for the column --><!--
+							<DataTemplate x:Key="TextBox">
+								<TextBox />
+							</DataTemplate>
+
+						</TreeDataGrid.Resources>-->
+					</TreeDataGrid>
 				</StackPanel>
 			</Border>
 		</Grid>
