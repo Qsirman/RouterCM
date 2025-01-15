@@ -9,6 +9,7 @@
         Height="800"
 		Icon="/Assets/app.ico">
 
+
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -87,29 +88,29 @@
 		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#E0E0E0" Height="40">
 
 			 <!--按钮-新建工程--> 
-			<Button Background="#00000000" ToolTip.Tip="新建工程">
+			<Button Background="#00000000" ToolTip.Tip="新建工程"  Click="OnNewProject">
 				<Image Source="/Assets/new_project.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			 <!--按钮-打开文件--> 
-			<Button Background="#00000000" ToolTip.Tip="打开文件">
+			<Button Background="#00000000" ToolTip.Tip="打开文件" Click="OnOpenFile">
 				<Image Source="/Assets/open_file.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			 <!--按钮-保存文件--> 
-			<Button Background="#00000000" ToolTip.Tip="保存文件">
+			<Button Background="#00000000" ToolTip.Tip="保存文件" Click="OnSaveFile">
 				<Image Source="/Assets/save.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
 
 			 <!--按钮-规约模板--> 
-			<Button Background="#00000000" ToolTip.Tip="规约模板">
+			<Button Background="#00000000" ToolTip.Tip="规约模板" Click="OnOpenProtocolTemp">
 				<Image Source="/Assets/protocol.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
-
+ 
 			 <!--按钮-设备模板--> 
-			<Button Background="#00000000" ToolTip.Tip="设备模板">
+			<Button Background="#00000000" ToolTip.Tip="设备模板" Click="OnOpendevTemp">
 				<Image Source="/Assets/device.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
@@ -117,22 +118,22 @@
 
 
 			 <!--按钮-通信设置--> 
-			<Button Background="#00000000" ToolTip.Tip="通信设置">
+			<Button Background="#00000000" ToolTip.Tip="通信设置" Click="OnCommSet">
 				<Image Source="/Assets/communication.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			 <!--按钮-监视--> 
-			<Button Background="#00000000" ToolTip.Tip="监视">
+			<Button Background="#00000000" ToolTip.Tip="监视" Click="OnMonitor">
 				<Image Source="/Assets/monitor.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			 <!--按钮-管理文件--> 
-			<Button Background="#00000000" ToolTip.Tip="管理文件">
+			<Button Background="#00000000" ToolTip.Tip="管理文件" Click="OnManageFile">
 				<Image Source="/Assets/file_manage.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			 <!--按钮-重新启动--> 
-			<Button Background="#00000000" ToolTip.Tip="重新启动">
+			<Button Background="#00000000" ToolTip.Tip="重新启动" Click="OnReboot">
 				<Image Source="/Assets/reboot.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
@@ -140,24 +141,24 @@
 
 
 			 <!--按钮-PUTTY--> 
-			<Button Background="#00000000" ToolTip.Tip="PUTTY">
+			<Button Background="#00000000" ToolTip.Tip="PUTTY" Click="OnOpenPutty">
 				<Image Source="/Assets/putty.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			 <!--按钮-FTP--> 
-			<Button Background="#00000000" ToolTip.Tip="FTP">
+			<Button Background="#00000000" ToolTip.Tip="FTP" Click="OnOpenFtp">
 				<Image Source="/Assets/ftp.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			 <Border Width="2" Background="Gray" Margin="5,5,5,5" Height="25"/>
 
 			 <!--按钮-操作说明书--> 
-			<Button Background="#00000000" ToolTip.Tip="操作说明书">
+			<Button Background="#00000000" ToolTip.Tip="操作说明书" Click="OnOpenTutorial">
 				<Image Source="/Assets/guidebook.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 
 			 <!--按钮-About--> 
-			<Button Background="#00000000" ToolTip.Tip="关于">
+			<Button Background="#00000000" ToolTip.Tip="关于" Click="OnAbout">
 				<Image Source="/Assets/about.ico" Width="30" Height="30" Margin="5,5,5,5" />
 			</Button>
 		</StackPanel>
@@ -181,17 +182,15 @@
 				<ColumnDefinition Width="*" />
 				 <!--右侧内容区域--> 
 			</Grid.ColumnDefinitions>
-
-			
+	
 			 <!--左侧导航栏--> 
 			<Border Background="#F0F0F0" Grid.Column="0">
-				<TreeView  ItemsSource="{Binding NavItems}">
-					<TreeView.ItemTemplate>
+				<StackPanel >
+					<TreeView ItemsSource="{Binding project_explorer.project_groups}" Tapped="myTextBlock_Tap">
+						<TreeView.DataTemplates>
 
-						<TreeDataTemplate   DataType="{x:Type vm:NavItem}" ItemsSource="{Binding Children}">
-							<WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
-
-								<TextBlock Text="{Binding name}">
+							<TreeDataTemplate   DataType="{x:Type vm:ProjectGroup}" ItemsSource="{Binding projects}">
+								<TextBlock Text="{Binding name}" Width="2000">
 									<TextBlock.ContextMenu>
 										<ContextMenu>
 											<MenuItem Header="新建" />
@@ -203,47 +202,41 @@
 											<MenuItem Header="更新服务器位置" />
 										</ContextMenu>
 									</TextBlock.ContextMenu>
-									</TextBlock>
-								<!--<CheckBox Content="{Binding name}" FontSize="14" FontFamily="微软雅黑" Tag="{Binding Children}" IsChecked="{Binding IsSelected}" Foreground="{Binding ForegroundBrush}" Unchecked="ck_Unchecked" Checked="ck_Checked"></CheckBox>-->
-								</WrapPanel> 
-								</TreeDataTemplate >
-						
-						</TreeView.ItemTemplate>
-					<!--<TreeView.DataTemplates>
-						<TreeDataTemplate DataType="models:NavItem" ItemsSource="{Binding Children}">
-							<TextBlock Foreground="Red" Text="{Binding name}" />
-						</TreeDataTemplate>
-						<DataTemplate DataType="models:NavItem">
-							<TextBlock Text="{Binding name}" />
-						</DataTemplate>
-					</TreeView.DataTemplates>-->
-				</TreeView>
+								</TextBlock>
+							</TreeDataTemplate >
 
+							<TreeDataTemplate   DataType="{x:Type vm:Project}" ItemsSource="{Binding com_managers}">
+								<TextBlock Text="{Binding name}"/>
+							</TreeDataTemplate >
+
+							<TreeDataTemplate   DataType="{x:Type vm:ComManager}" ItemsSource="{Binding modules}">
+								<TextBlock Text="{Binding name}"/>
+							</TreeDataTemplate >
+
+							<TreeDataTemplate   DataType="{x:Type vm:Module}" ItemsSource="{Binding ports}">
+								<TextBlock Text="{Binding name}"/>
+							</TreeDataTemplate >
+
+							<TreeDataTemplate   DataType="{x:Type vm:Port}" ItemsSource="{Binding devs}">
+								<TextBlock Text="{Binding name}"/>
+							</TreeDataTemplate >
+
+							<TreeDataTemplate   DataType="{x:Type vm:Dev}">
+								<TextBlock Text="{Binding name}"/>
+							</TreeDataTemplate >
+
+						</TreeView.DataTemplates>
+					</TreeView>
+					<!--<TabStrip  Margin="5" ItemsSource="{Binding tabitems2}" FontSize="1"/>-->
+				</StackPanel>
 			</Border>
 
 			 <!--右侧内容区域--> 
 			<Border Background="#FFFFFF" Grid.Column="1">
 				<StackPanel >
-				<TextBlock Text ="{Binding TableTitle, Mode=TwoWay}" />
-				<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
-
-					<TabControl Margin="5" Name="tabcontrol" ItemsSource="{Binding tabitems}" SelectionChanged = "_parentTabControl_SelectionChanged">
-						<!--<TabItem Header="遥测">
-							<TreeDataGrid Source="{Binding Source}"/>
-						</TabItem>
-						<TabItem Header="遥信">
-						</TabItem>
-						<TabItem Header="遥脉">
-							<TreeDataGrid Source="{Binding Source}"/>
-						</TabItem>
-						<TabItem Header="遥控">
-							<TreeDataGrid Source="{Binding Source}"/>
-						</TabItem>
-						<TabItem Header="遥调">
-							<TreeDataGrid Source="{Binding Source}"/>
-						</TabItem>-->
-					</TabControl>
-					<!--<Button Click="on_click_test">测试按钮</Button>-->
+					<TextBlock Text ="{Binding TableTitle, Mode=TwoWay}" />
+					<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
+					<TabStrip  Margin="5" Name="TabDataCatChoose" ItemsSource="{Binding TableTabItems}" SelectionChanged = "TabCtrlSelectChanged"/>
 					<TreeDataGrid Source="{Binding Source}"/>
 				</StackPanel>
 			</Border>

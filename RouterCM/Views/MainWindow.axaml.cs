@@ -7,6 +7,9 @@ using MsBox.Avalonia.Enums;
 using MsBox.Avalonia;
 using RouterCM.ViewModels;
 using Avalonia.Controls.Models.TreeDataGrid;
+using Avalonia.Controls.Primitives;
+using Avalonia.Platform.Storage;
+using System.IO;
 
 namespace RouterCM.Views
 {
@@ -19,175 +22,237 @@ namespace RouterCM.Views
         {
             InitializeComponent();
 
-            viewModel = new MainWindowViewModel();
+            viewModel = (MainWindowViewModel)DataContext;
 
-            //tabControl = this.FindControl<TabControl>("tabcontrol");
-            //tabControl.SelectionChanged += _parentTabControl_SelectionChanged; // here is the subscription point
-            //viewModel.TableTitle = "123";
+            ContextMenu contextMenu = new ContextMenu();
+            contextMenu.Items.Add("复制");
+            contextMenu.Items.Add("粘贴");
+            contextMenu.Items.Add("删除");
+
+        }
+
+        private async void OnNewProject(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnOpenFile(object sender, RoutedEventArgs args)
+        {
+            // 从当前控件获取 TopLevel。或者，您也可以使用 Window 引用。
+            var topLevel = TopLevel.GetTopLevel(this);
+
+            // 启动异步操作以打开对话框。
+            var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Open ini File",
+                AllowMultiple = false
+            });
+
+            if (files.Count >= 1)
+            {
+                // 打开第一个文件的读取流。
+                await using var stream = await files[0].OpenReadAsync();
+                using var streamReader = new StreamReader(stream);
+                // 将文件的所有内容作为文本读取。
+                var fileContent = await streamReader.ReadToEndAsync();
+            }
         }
 
 
-        public async void _parentTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private async void OnSaveFile(object sender, RoutedEventArgs args)
         {
-            TabControl tabcontrol = this.FindControl<TabControl>("tabcontrol");
+
+        }
+
+        private async void OnOpenProtocolTemp(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnOpendevTemp(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnCommSet(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnMonitor(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnManageFile(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnReboot(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnOpenPutty(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnOpenFtp(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnOpenTutorial(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void OnAbout(object sender, RoutedEventArgs args)
+        {
+
+        }
+
+        private async void TabCtrlSelectChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabStrip tabcontrol = this.FindControl<TabStrip>("TabDataCatChoose");
+            viewModel = (MainWindowViewModel)DataContext;
             viewModel.TableTitle = tabcontrol.SelectedIndex.ToString();
-            if (this.IsVisible)
-                MessageBoxManager.GetMessageBoxStandard("Caption", $"viewModel.TableTitle = {viewModel.TableTitle}",
-           ButtonEnum.Ok).ShowWindowDialogAsync(this);
             switch (tabcontrol.SelectedIndex)
             {
                 case 0:
                     {
-                        viewModel.Source = new FlatTreeDataGridSource<TableItemYC>(viewModel.TableItems)
+                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
                         {
-                            Columns =
-                        {
-                            new TextColumn<TableItemYC, string>("ID0", x => x.id),
-                            new TextColumn<TableItemYC, string>("名称", x => x.name),
-                            new TextColumn<TableItemYC, string>("类型", x => x.val_type),
-                            new TextColumn<TableItemYC, string>("单位", x => x.unit),
-                            new TextColumn<TableItemYC, int>("组号", x => x.groupid),
-                            new TextColumn<TableItemYC, int>("序号", x => x.no),
-                            new TextColumn<TableItemYC, double>("CC1", x => x.cc1),
-                            new TextColumn<TableItemYC, double>("Max", x => x.max),
-                            new TextColumn<TableItemYC, double>("归零值", x => x.zero_val),
-                            new TextColumn<TableItemYC, string>("限值方式", x => x.limit_type),
-                            new TextColumn<TableItemYC, double>("最小限值", x => x.limit_min),
-                            new TextColumn<TableItemYC, string>("数据类型", x => x.data_type),
-                            new TextColumn<TableItemYC, string>("数据字节序", x => x.byte_order),
-                            new TextColumn<TableItemYC, int>("转发分组", x => x.router_group),
-                            new TextColumn<TableItemYC, int>("转发地址", x => x.router_addr),
-                            new TextColumn<TableItemYC, int>("功能码", x => x.code),
-                            new TextColumn<TableItemYC, int>("偏移地址", x => x.addr_bias),
-                        },
+                            Columns = {
+                                new TextColumn<TableItem, int>("ID", x => x.id),
+                                new TextColumn<TableItem, string>("名称", x => x.args["Name"]),
+                                new TextColumn<TableItem, string>("类型", x => x.args["Type"]),
+                                new TextColumn<TableItem, string>("单位",x => x.args["Unit"]),
+                                new TextColumn<TableItem, string>("组号",x => x.args["GroupNum"]),
+                                new TextColumn<TableItem, string>("序号",x => x.args["Order"]),
+                                new TextColumn<TableItem, string>("CC1", x => x.args["CC1"]),
+                                new TextColumn<TableItem, string>("Max", x => x.args["Max"]),
+                                new TextColumn<TableItem, string>("归零值", x => x.args["ZeroVal"]),
+                                new TextColumn<TableItem, string>("限值方式",x => x.args["LimitType"]),
+                                new TextColumn<TableItem, string>("最小限值",x => x.args["LimitMin"]),
+                                new TextColumn<TableItem, string>("数据类型",x => x.args["DataType"]),
+                                new TextColumn<TableItem, string>("数据字节序", x => x.args["ByteOrder"]),
+                                new TextColumn<TableItem, string>("转发分组", x => x.args["TransGroup"]),
+                                new TextColumn<TableItem, string>("转发地址", x => x.args["TransAddr"]),
+                                new TextColumn<TableItem, string>("功能码", x => x.args["Code"]),
+                                new TextColumn<TableItem, string>("偏移地址", x => x.args["AddrBias"]),
+                            }
                         };
                         break;
                     }
-
                 case 1:
                     {
-                        viewModel.Source.Columns.Clear();
-                        //     viewModel.Source = new FlatTreeDataGridSource<TableItemYC>(viewModel.TableItems)
-                        //     {
-                        //         Columns =
-                        //     {
-                        //         new TextColumn<TableItemYC, string>("ID1", x => x.id),
-                        //         new TextColumn<TableItemYC, string>("名称", x => x.name),
-                        //         new TextColumn<TableItemYC, string>("类型", x => x.val_type),
-                        //         new TextColumn<TableItemYC, string>("单位", x => x.unit),
-                        //         new TextColumn<TableItemYC, int>("组号", x => x.groupid),
-                        //         new TextColumn<TableItemYC, int>("序号", x => x.no),
-                        //         new TextColumn<TableItemYC, double>("CC1", x => x.cc1),
-                        //         new TextColumn<TableItemYC, double>("Max", x => x.max),
-                        //         new TextColumn<TableItemYC, double>("归零值", x => x.zero_val),
-                        //         new TextColumn<TableItemYC, string>("限值方式", x => x.limit_type),
-                        //         new TextColumn<TableItemYC, double>("最小限值", x => x.limit_min),
-                        //         new TextColumn<TableItemYC, string>("数据类型", x => x.data_type),
-                        //         new TextColumn<TableItemYC, string>("数据字节序", x => x.byte_order),
-                        //         new TextColumn<TableItemYC, int>("转发分组", x => x.router_group),
-                        //         new TextColumn<TableItemYC, int>("转发地址", x => x.router_addr),
-                        //         new TextColumn<TableItemYC, int>("功能码", x => x.code),
-                        //         new TextColumn<TableItemYC, int>("偏移地址", x => x.addr_bias),
-                        //     },
-                        //     };
-                        //     MessageBoxManager.GetMessageBoxStandard("Caption", $"current sleect: {tabcontrol.SelectedIndex}",
-                        //ButtonEnum.Ok).ShowWindowDialogAsync(this);
+
+                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
+                        {
+                            Columns =
+                            {
+                                new TextColumn<TableItem, int>("ID", x => x.id),
+                                new TextColumn<TableItem, string>("名称", x => x.args["Name"]),
+                                new TextColumn<TableItem, string>("组号",x => x.args["GroupNum"]),
+                                new TextColumn<TableItem, string>("序号",x => x.args["Order"]),
+                                new TextColumn<TableItem, string>("数据类型",x => x.args["DataType"]),
+                                new TextColumn<TableItem, string>("规约地址",x => x.args["ProtocalAddr"]),
+                                new TextColumn<TableItem, string>("转发分组", x => x.args["TransGroup"]),
+                                new TextColumn<TableItem, string>("转发地址", x => x.args["TransAddr"]),
+                                new TextColumn<TableItem, string>("功能码", x => x.args["Code"]),
+                                new TextColumn<TableItem, string>("偏移地址", x => x.args["AddrBias"]),
+                            }
+                        };
                         break;
                     }
                 case 2:
                     {
-                        viewModel.Source = new FlatTreeDataGridSource<TableItemYC>(viewModel.TableItems)
+
+                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
                         {
                             Columns =
-                        {
-                            new TextColumn<TableItemYC, string>("ID2", x => x.id),
-                            new TextColumn<TableItemYC, string>("名称", x => x.name),
-                            new TextColumn<TableItemYC, string>("类型", x => x.val_type),
-                            new TextColumn<TableItemYC, string>("单位", x => x.unit),
-                            new TextColumn<TableItemYC, int>("组号", x => x.groupid),
-                            new TextColumn<TableItemYC, int>("序号", x => x.no),
-                            new TextColumn<TableItemYC, double>("CC1", x => x.cc1),
-                            new TextColumn<TableItemYC, double>("Max", x => x.max),
-                            new TextColumn<TableItemYC, double>("归零值", x => x.zero_val),
-                            new TextColumn<TableItemYC, string>("限值方式", x => x.limit_type),
-                            new TextColumn<TableItemYC, double>("最小限值", x => x.limit_min),
-                            new TextColumn<TableItemYC, string>("数据类型", x => x.data_type),
-                            new TextColumn<TableItemYC, string>("数据字节序", x => x.byte_order),
-                            new TextColumn<TableItemYC, int>("转发分组", x => x.router_group),
-                            new TextColumn<TableItemYC, int>("转发地址", x => x.router_addr),
-                            new TextColumn<TableItemYC, int>("功能码", x => x.code),
-                            new TextColumn<TableItemYC, int>("偏移地址", x => x.addr_bias),
-                        },
+                            {
+                                new TextColumn<TableItem, int>("ID", x => x.id),
+                                new TextColumn<TableItem, string>("名称", x => x.args["Name"]),
+                                new TextColumn<TableItem, string>("类型", x => x.args["Type"]),
+                                new TextColumn<TableItem, string>("单位",x => x.args["Unit"]),
+                                new TextColumn<TableItem, string>("组号",x => x.args["GroupNum"]),
+                                new TextColumn<TableItem, string>("序号",x => x.args["Order"]),
+                                new TextColumn<TableItem, string>("CC1", x => x.args["CC1"]),
+                                new TextColumn<TableItem, string>("Max", x => x.args["Max"]),
+                                new TextColumn<TableItem, string>("归零值", x => x.args["ZeroVal"]),
+                                new TextColumn<TableItem, string>("限值方式",x => x.args["LimitType"]),
+                                new TextColumn<TableItem, string>("最小限值",x => x.args["LimitMin"]),
+                                new TextColumn<TableItem, string>("数据类型",x => x.args["DataType"]),
+                                new TextColumn<TableItem, string>("数据字节序", x => x.args["ByteOrder"]),
+                                new TextColumn<TableItem, string>("转发分组", x => x.args["TransGroup"]),
+                                new TextColumn<TableItem, string>("转发地址", x => x.args["TransAddr"]),
+                                new TextColumn<TableItem, string>("功能码", x => x.args["Code"]),
+                                new TextColumn<TableItem, string>("偏移地址", x => x.args["AddrBias"]),
+                            }
                         };
                         break;
                     }
                 case 3:
                     {
-                        viewModel.Source = new FlatTreeDataGridSource<TableItemYC>(viewModel.TableItems)
+
+                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
                         {
                             Columns =
-                        {
-                            new TextColumn<TableItemYC, string>("ID3", x => x.id),
-                            new TextColumn<TableItemYC, string>("名称", x => x.name),
-                            new TextColumn<TableItemYC, string>("类型", x => x.val_type),
-                            new TextColumn<TableItemYC, string>("单位", x => x.unit),
-                            new TextColumn<TableItemYC, int>("组号", x => x.groupid),
-                            new TextColumn<TableItemYC, int>("序号", x => x.no),
-                            new TextColumn<TableItemYC, double>("CC1", x => x.cc1),
-                            new TextColumn<TableItemYC, double>("Max", x => x.max),
-                            new TextColumn<TableItemYC, double>("归零值", x => x.zero_val),
-                            new TextColumn<TableItemYC, string>("限值方式", x => x.limit_type),
-                            new TextColumn<TableItemYC, double>("最小限值", x => x.limit_min),
-                            new TextColumn<TableItemYC, string>("数据类型", x => x.data_type),
-                            new TextColumn<TableItemYC, string>("数据字节序", x => x.byte_order),
-                            new TextColumn<TableItemYC, int>("转发分组", x => x.router_group),
-                            new TextColumn<TableItemYC, int>("转发地址", x => x.router_addr),
-                            new TextColumn<TableItemYC, int>("功能码", x => x.code),
-                            new TextColumn<TableItemYC, int>("偏移地址", x => x.addr_bias),
-                        },
+                            {
+                                new TextColumn<TableItem, int>("ID", x => x.id),
+                                new TextColumn<TableItem, string>("名称", x => x.args["Name"]),
+                                new TextColumn<TableItem, string>("序号",x => x.args["Order"]),
+                                new TextColumn<TableItem, string>("功能码", x => x.args["Code"]),
+                                new TextColumn<TableItem, string>("数据类型",x => x.args["DataType"]),
+                                new TextColumn<TableItem, string>("寄存器地址",x => x.args["AddrReg"]),
+                                new TextColumn<TableItem, string>("偏移地址", x => x.args["AddrBias"]),
+                                new TextColumn<TableItem, string>("写入ON值", x => x.args["OnVal"]),
+                                new TextColumn<TableItem, string>("写入OFF值", x => x.args["OffVal"]),
+                                new TextColumn<TableItem, string>("转发分组", x => x.args["TransGroup"]),
+                                new TextColumn<TableItem, string>("转发地址", x => x.args["TransAddr"]),
+                                new TextColumn<TableItem, string>("遥控报文", x => x.args["MsgYK"]),
+                            }
                         };
                         break;
                     }
                 case 4:
                     {
-                        viewModel.Source = new FlatTreeDataGridSource<TableItemYC>(viewModel.TableItems)
+
+                        viewModel.Source = new FlatTreeDataGridSource<TableItem>(new ObservableCollection<TableItem>() { new TableItem() })
                         {
                             Columns =
-                        {
-                            new TextColumn<TableItemYC, string>("ID4", x => x.id),
-                            new TextColumn<TableItemYC, string>("名称", x => x.name),
-                            new TextColumn<TableItemYC, string>("类型", x => x.val_type),
-                            new TextColumn<TableItemYC, string>("单位", x => x.unit),
-                            new TextColumn<TableItemYC, int>("组号", x => x.groupid),
-                            new TextColumn<TableItemYC, int>("序号", x => x.no),
-                            new TextColumn<TableItemYC, double>("CC1", x => x.cc1),
-                            new TextColumn<TableItemYC, double>("Max", x => x.max),
-                            new TextColumn<TableItemYC, double>("归零值", x => x.zero_val),
-                            new TextColumn<TableItemYC, string>("限值方式", x => x.limit_type),
-                            new TextColumn<TableItemYC, double>("最小限值", x => x.limit_min),
-                            new TextColumn<TableItemYC, string>("数据类型", x => x.data_type),
-                            new TextColumn<TableItemYC, string>("数据字节序", x => x.byte_order),
-                            new TextColumn<TableItemYC, int>("转发分组", x => x.router_group),
-                            new TextColumn<TableItemYC, int>("转发地址", x => x.router_addr),
-                            new TextColumn<TableItemYC, int>("功能码", x => x.code),
-                            new TextColumn<TableItemYC, int>("偏移地址", x => x.addr_bias),
-                        },
+                            {
+                                new TextColumn<TableItem, int>("ID", x => x.id),
+                                new TextColumn<TableItem, string>("名称", x => x.args["Name"]),
+                                new TextColumn<TableItem, string>("组号",x => x.args["GroupNum"]),
+                                new TextColumn<TableItem, string>("序号",x => x.args["Order"]),
+                                new TextColumn<TableItem, string>("CC1", x => x.args["CC1"]),
+                                new TextColumn<TableItem, string>("Max", x => x.args["Max"]),
+                                new TextColumn<TableItem, string>("数据类型",x => x.args["DataType"]),
+                                new TextColumn<TableItem, string>("规约地址",x => x.args["ProtocalAddr"]),
+                                new TextColumn<TableItem, string>("数据字节序", x => x.args["ByteOrder"]),
+                                new TextColumn<TableItem, string>("转发分组", x => x.args["TransGroup"]),
+                                new TextColumn<TableItem, string>("转发地址", x => x.args["TransAddr"]),
+                            }
                         };
                         break;
                     }
             }
-            //viewModel.tabitems = new ObservableCollection<TabItem>()
-            //{
-            //    new TabItem { Header = "遥测", Content = "One's content" },
-            //    new TabItem { Header = "遥信", Content = "Two's content" },
-            //    new TabItem { Header = "遥脉", Content = "Two's content" },
-            //    new TabItem { Header = "遥控", Content = "Two's content" },
-            //    new TabItem { Header = "遥调", Content = "Two's content" },
-            //};
+
         }
 
-        private void Binding(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
+        public void myTextBlock_Tap(object sender, RoutedEventArgs e)
         {
+            TreeViewItem item;
+            var control = e.Source as Control;
+            // 处理点击事件
+            MessageBoxManager.GetMessageBoxStandard("Caption", $"name: {control.Name}, type: {control.GetType()}",
+           ButtonEnum.Ok).ShowWindowDialogAsync(this);
         }
     }
 }
