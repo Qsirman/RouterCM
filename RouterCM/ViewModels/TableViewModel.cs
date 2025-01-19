@@ -11,6 +11,15 @@ using Microsoft.VisualBasic;
 
 namespace RouterCM.ViewModels
 {
+    public enum DataCategory
+    {
+        Unknown = -1,
+        YC,// 遥测
+        YX,// 遥信
+        YM,// 遥脉
+        YK,// 遥控
+        YT,// 遥调
+    };
     public class TableItem
     {
         public int id = 0;
@@ -19,6 +28,15 @@ namespace RouterCM.ViewModels
         public TableItem()
         {
             args["Name"] = "UA";
+        }
+    }
+
+    public class TableViewModel
+    {
+        public ObservableCollection<TableItem> Items { get; } = new();
+        public TableViewModel()
+        {
+            Items.Add(new TableItem());
         }
     }
 }

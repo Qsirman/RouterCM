@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="RouterCM.Views.MainWindow"
 		xmlns:models="clr-namespace:RouterCM.Models;assembly=RouterCM"
+		xmlns:dialogHost="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
         xmlns:vm="using:RouterCM.ViewModels"
 		x:DataType="vm:MainWindowViewModel"
         Title="RouterCM"
@@ -19,10 +20,29 @@
 	<Window.Resources>
 		<StreamGeometry x:Key="TreeViewItemCollapsedChevronPathData">M 0,0 3,3 0,6 Z</StreamGeometry>
 		<StreamGeometry x:Key="TreeViewItemExpandedChevronPathData">M 0,0 6,0 3,3 Z</StreamGeometry>
+
+			<StackPanel x:Key="DialogViewInfo" >
+				<TextBlock Text="{Binding DialogViewInfoText}"/>
+				<Button Margin="0 16 0 0"
+						Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=dialogHost:DialogHost}, Path=CloseDialogCommand}">
+					确认
+				</Button>
+			</StackPanel>
+
+		<StackPanel x:Key="DialogViewInfoWithPic">
+			<Grid ColumnDefinitions="150,2*" RowDefinitions="Auto,Auto"  Margin="10"> 
+
+				<Image Source="/Assets/app.ico" Width="80" Height="80" Margin="5,5,5,5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="1"/>
+				<TextBlock Text="{Binding DialogViewInfoText}"  Grid.Column="1" Grid.Row="0"/>
+				<Button Margin="0 16 0 0"
+					Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=dialogHost:DialogHost}, Path=CloseDialogCommand}" Grid.Column="1" Grid.Row="1">
+					确认
+				</Button>
+			</Grid>
+		</StackPanel>
 	</Window.Resources>
 	
 	<Window.Styles>
-
 		<Style Selector="TabStrip">
 			<!--<Setter Property="MaxHeight" Value="15"/>-->
 			<!--<Setter Property="Margin" Value="0,0,0,0"/>-->
@@ -68,251 +88,264 @@
 			<Setter Property="Width" Value="15"></Setter>
 			<Setter Property="Height" Value="15"></Setter>
 		</Style>-->
-		
+
 	</Window.Styles>
 
-			<DockPanel x:Name="Root">
-		 <!--顶部菜单栏--> 
-		<Menu DockPanel.Dock="Top" Background="#F0F0F0">
-			<MenuItem Header="文件">
-				<MenuItem Header="新建" />
-				<MenuItem Header="打开" />
-				<MenuItem Header="保存" />
-				<MenuItem Header="另存为" />
-				<MenuItem Header="退出" />
-			</MenuItem>
-			<MenuItem Header="模板">
-				<MenuItem Header="设备模板" />
-				<MenuItem Header="规约模板" />
-			</MenuItem>
-			<MenuItem Header="设备管理">
-				<MenuItem Header="通信设置" />
-				<MenuItem Header="开始监视" />
-				<MenuItem Header="停止监视" />
-				<Separator Height="1" Background="Gray" Margin="0"/>
-				<MenuItem Header="更新配置" />
-				<MenuItem Header="管理文件" />
-				<MenuItem Header="读取工程" />
-				<MenuItem Header="设置时钟" />
-				<MenuItem Header="显示日志" />
-				<MenuItem Header="告警日志" />
-				<MenuItem Header="流量历史数据" />
-				<Separator Height="1" Background="Gray" Margin="0"/>
-				<MenuItem Header="导入升级包" />
-				<MenuItem Header="本地升级" />
-				<MenuItem Header="重新启动" />
-				<MenuItem Header="恢复出厂设置" />
-			</MenuItem>
-			<MenuItem Header="远程维护">
-				<MenuItem Header="远程配置" />
-				<MenuItem Header="可控设备集" />
-				<MenuItem Header="登陆退出" />
-				<MenuItem Header="增加可控设备" />
-			</MenuItem>
-			<MenuItem Header="工具">
-				<MenuItem Header="PUTTY" />
-				<MenuItem Header="FTP" />
-				<MenuItem Header="局域网扫描" />
-				<MenuItem Header="能耗标准化工具" />
-				<MenuItem Header="串口发包工具" />
-			</MenuItem>
-			<MenuItem Header="帮助">
-				<MenuItem Header="操作说明书">
-					<MenuItem Header="软件操作说明书" />
-					<Separator Height="1" Background="Gray" Margin="0"/>
-					<MenuItem Header="通用型串口DLT645采集侧主节点规约配置说明V1.0" />
-					<MenuItem Header="通用型串口DLT645-07设备侧主节点规约配置说明V1.0" />
-					<MenuItem Header="通用型串口DLT645-97设备侧主节点规约配置说明V1.0" />
-					<MenuItem Header="通用型串口Modbus设备侧主节点规约配置说明V1.0" />
-					<MenuItem Header="通用型以太网Modbustcp设备侧客户端规约配置说明V1.0" />
-					<MenuItem Header="通用型以太网Modbustcp主站侧单服务端口规约配置说明V1.0" />
-					<MenuItem Header="自定义以太网IEC104主站侧服务端规约配置说明V1.0" />
-					<MenuItem Header="自定义以太网IEC104设备侧客户端规约配置说明V1.0" />
+
+	<dialogHost:DialogHost
+		Identifier="MainDialogHost"
+		DisableOpeningAnimation="False"
+		Classes="disable-content-cover-animations">
+		<DockPanel>
+			 <!--顶部菜单栏--> 
+			<Menu DockPanel.Dock="Top" Background="#F0F0F0">
+				<MenuItem Header="文件">
+					<MenuItem Header="新建" Click="OnAbout"/>
+					<MenuItem Header="打开" />
+					<MenuItem Header="保存" />
+					<MenuItem Header="另存为" />
+					<MenuItem Header="退出" />
 				</MenuItem>
-				<MenuItem Header="关于管理软件" />
-				<MenuItem Header="设置" />
-				<MenuItem Header="检查新程序" />
-				<MenuItem Header="锁定程序" />
-			</MenuItem>
-		</Menu>
+				<MenuItem Header="模板">
+					<MenuItem Header="设备模板" />
+					<MenuItem Header="规约模板" />
+				</MenuItem>
+				<MenuItem Header="设备管理">
+					<MenuItem Header="通信设置" />
+					<MenuItem Header="开始监视" />
+					<MenuItem Header="停止监视" />
+					<Separator Height="1" Background="Gray" Margin="0"/>
+					<MenuItem Header="更新配置" />
+					<MenuItem Header="管理文件" />
+					<MenuItem Header="读取工程" />
+					<MenuItem Header="设置时钟" />
+					<MenuItem Header="显示日志" />
+					<MenuItem Header="告警日志" />
+					<MenuItem Header="流量历史数据" />
+					<Separator Height="1" Background="Gray" Margin="0"/>
+					<MenuItem Header="导入升级包" />
+					<MenuItem Header="本地升级" />
+					<MenuItem Header="重新启动" />
+					<MenuItem Header="恢复出厂设置" />
+				</MenuItem>
+				<MenuItem Header="远程维护">
+					<MenuItem Header="远程配置" />
+					<MenuItem Header="可控设备集" />
+					<MenuItem Header="登陆退出" />
+					<MenuItem Header="增加可控设备" />
+				</MenuItem>
+				<MenuItem Header="工具">
+					<MenuItem Header="PUTTY" />
+					<MenuItem Header="FTP" />
+					<MenuItem Header="局域网扫描" />
+					<MenuItem Header="能耗标准化工具" />
+					<MenuItem Header="串口发包工具" />
+				</MenuItem>
+				<MenuItem Header="帮助">
+					<MenuItem Header="操作说明书">
+						<MenuItem Header="软件操作说明书" />
+						<Separator Height="1" Background="Gray" Margin="0"/>
+						<MenuItem Header="通用型串口DLT645采集侧主节点规约配置说明V1.0" />
+						<MenuItem Header="通用型串口DLT645-07设备侧主节点规约配置说明V1.0" />
+						<MenuItem Header="通用型串口DLT645-97设备侧主节点规约配置说明V1.0" />
+						<MenuItem Header="通用型串口Modbus设备侧主节点规约配置说明V1.0" />
+						<MenuItem Header="通用型以太网Modbustcp设备侧客户端规约配置说明V1.0" />
+						<MenuItem Header="通用型以太网Modbustcp主站侧单服务端口规约配置说明V1.0" />
+						<MenuItem Header="自定义以太网IEC104主站侧服务端规约配置说明V1.0" />
+						<MenuItem Header="自定义以太网IEC104设备侧客户端规约配置说明V1.0" />
+					</MenuItem>
+					<MenuItem Header="关于管理软件" />
+					<MenuItem Header="设置" />
+					<MenuItem Header="检查新程序" />
+					<MenuItem Header="锁定程序" />
+				</MenuItem>
+			</Menu>
 
-		 <!--分割线--> 
-		<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
+			 <!--分割线--> 
+			<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
 
-		 <!--模拟工具栏--> 
-		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#E0E0E0" Height="40">
+			 <!--模拟工具栏--> 
+			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#E0E0E0" Height="40">
 
-			 <!--按钮-新建工程--> 
-			<Button Background="#00000000" ToolTip.Tip="新建工程"  Click="OnNewProject">
-				<Image Source="/Assets/new_project.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <!--按钮-新建工程--> 
+				<Button Background="#00000000" ToolTip.Tip="新建工程"  Click="OnNewProject">
+					<Image Source="/Assets/new_project.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
 
-			 <!--按钮-打开文件--> 
-			<Button Background="#00000000" ToolTip.Tip="打开文件" Click="OnOpenFile">
-				<Image Source="/Assets/open_file.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <!--按钮-打开文件--> 
+				<Button Background="#00000000" ToolTip.Tip="打开文件" Click="OnOpenFile">
+					<Image Source="/Assets/open_file.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
 
-			 <!--按钮-保存文件--> 
-			<Button Background="#00000000" ToolTip.Tip="保存文件" Click="OnSaveFile">
-				<Image Source="/Assets/save.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <!--按钮-保存文件--> 
+				<Button Background="#00000000" ToolTip.Tip="保存文件" Click="OnSaveFile">
+					<Image Source="/Assets/save.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
 
-			<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
+				<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
 
-			 <!--按钮-规约模板--> 
-			<Button Background="#00000000" ToolTip.Tip="规约模板" Click="OnOpenProtocolTemp">
-				<Image Source="/Assets/protocol.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <!--按钮-规约模板--> 
+				<Button Background="#00000000" ToolTip.Tip="规约模板" Click="OnOpenProtocolTemp">
+					<Image Source="/Assets/protocol.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
  
-			 <!--按钮-设备模板--> 
-			<Button Background="#00000000" ToolTip.Tip="设备模板" Click="OnOpendevTemp">
-				<Image Source="/Assets/device.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <!--按钮-设备模板--> 
+				<Button Background="#00000000" ToolTip.Tip="设备模板" Click="OnOpendevTemp">
+					<Image Source="/Assets/device.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
 
-			<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
+				<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
+
+				 <!--按钮-通信设置--> 
+				<Button Background="#00000000" ToolTip.Tip="通信设置" Click="OnCommSet">
+					<Image Source="/Assets/communication.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
+
+				 <!--按钮-监视--> 
+				<Button Background="#00000000" ToolTip.Tip="监视" Click="OnMonitor">
+					<Image Source="/Assets/monitor.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
+
+				 <!--按钮-管理文件--> 
+				<Button Background="#00000000" ToolTip.Tip="管理文件" Click="OnManageFile">
+					<Image Source="/Assets/file_manage.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
+
+				 <!--按钮-重新启动--> 
+				<Button Background="#00000000" ToolTip.Tip="重新启动" Click="OnReboot">
+					<Image Source="/Assets/reboot.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
+
+				<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
 
 
-			 <!--按钮-通信设置--> 
-			<Button Background="#00000000" ToolTip.Tip="通信设置" Click="OnCommSet">
-				<Image Source="/Assets/communication.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <!--按钮-PUTTY--> 
+				<Button Background="#00000000" ToolTip.Tip="PUTTY" Click="OnOpenPutty">
+					<Image Source="/Assets/putty.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
 
-			 <!--按钮-监视--> 
-			<Button Background="#00000000" ToolTip.Tip="监视" Click="OnMonitor">
-				<Image Source="/Assets/monitor.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <!--按钮-FTP--> 
+				<Button Background="#00000000" ToolTip.Tip="FTP" Click="OnOpenFtp">
+					<Image Source="/Assets/ftp.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
 
-			 <!--按钮-管理文件--> 
-			<Button Background="#00000000" ToolTip.Tip="管理文件" Click="OnManageFile">
-				<Image Source="/Assets/file_manage.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <Border Width="2" Background="Gray" Margin="5,5,5,5" Height="25"/>
 
-			 <!--按钮-重新启动--> 
-			<Button Background="#00000000" ToolTip.Tip="重新启动" Click="OnReboot">
-				<Image Source="/Assets/reboot.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
+				 <!--按钮-操作说明书--> 
+				<Button Background="#00000000" ToolTip.Tip="操作说明书" Click="OnOpenTutorial">
+					<Image Source="/Assets/guidebook.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
 
-			<Border Width="2" Background="Gray" Margin="0,0" Height="25"/>
+				 <!--按钮-About--> 
+				<Button Background="#00000000" ToolTip.Tip="关于" Click="OnAbout">
+					<Image Source="/Assets/about.ico" Width="30" Height="30" Margin="5,5,5,5" />
+				</Button>
 
-
-			 <!--按钮-PUTTY--> 
-			<Button Background="#00000000" ToolTip.Tip="PUTTY" Click="OnOpenPutty">
-				<Image Source="/Assets/putty.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
-
-			 <!--按钮-FTP--> 
-			<Button Background="#00000000" ToolTip.Tip="FTP" Click="OnOpenFtp">
-				<Image Source="/Assets/ftp.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
-
-			 <Border Width="2" Background="Gray" Margin="5,5,5,5" Height="25"/>
-
-			 <!--按钮-操作说明书--> 
-			<Button Background="#00000000" ToolTip.Tip="操作说明书" Click="OnOpenTutorial">
-				<Image Source="/Assets/guidebook.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
-
-			 <!--按钮-About--> 
-			<Button Background="#00000000" ToolTip.Tip="关于" Click="OnAbout">
-				<Image Source="/Assets/about.ico" Width="30" Height="30" Margin="5,5,5,5" />
-			</Button>
-		</StackPanel>
-
-		 <!--分割线--> 
-		<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
-
-		 <!--模拟状态栏--> 
-		<Border DockPanel.Dock="Bottom" Background="#E0E0E0" Height="30">
-			<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-				<TextBlock Text="状态: 准备就绪" Margin="5,0" VerticalAlignment="Center" />
-				<TextBlock Text=" | 时间: 2025-01-03 16:51:27" Margin="5,0" VerticalAlignment="Center" />
+			
+				<Button HorizontalAlignment="Center" VerticalAlignment="Center"
+						Click="OpenNoAnimationDialog">
+					Open
+				</Button>
+			
 			</StackPanel>
-		</Border>
 
-		 <!--主内容区--> 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				 <!--左侧导航栏--> 
-				<ColumnDefinition Width="Auto" />
-				 <!--右侧内容区域--> 
-			</Grid.ColumnDefinitions>
-	
-			 <!--左侧导航栏--> 
-			<Border Background="#F0F0F0" Grid.Column="0" >
-				<Grid >
-					<Grid.RowDefinitions>
-						<RowDefinition Height="*" />
-						<RowDefinition Height="Auto" />
-					</Grid.RowDefinitions>
-					<TreeView ItemsSource="{Binding project_explorer.Items}" SelectedItem="{Binding ExplorerItemSelected}">
-						<TreeView.DataTemplates>
+			 <!--分割线--> 
+			<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
 
-							<TreeDataTemplate   DataType="{x:Type vm:ExplorerItem}" ItemsSource="{Binding Children}">
-								<TextBlock Text="{Binding Name}"/>
-							</TreeDataTemplate >
-							
-							<!--<TreeDataTemplate   DataType="{x:Type vm:ProjectGroup}" ItemsSource="{Binding projects}">
-								<TextBlock Text="{Binding name}">
-									<TextBlock.ContextMenu>
-										<ContextMenu>
-											<MenuItem Header="新建" />
-											<MenuItem Header="删除" />
-											<MenuItem Header="移动" />
-											<MenuItem Header="重命名" />
-											<MenuItem Header="另存为" />
-											<MenuItem Header="打开文件位置" />
-											<MenuItem Header="更新服务器位置" />
-										</ContextMenu>
-									</TextBlock.ContextMenu>
-								</TextBlock>
-							</TreeDataTemplate >
-
-							<TreeDataTemplate   DataType="{x:Type vm:Project}" ItemsSource="{Binding com_managers}">
-								<TextBlock Text="{Binding name}"/>
-							</TreeDataTemplate >
-
-							<TreeDataTemplate   DataType="{x:Type vm:ComManager}" ItemsSource="{Binding modules}">
-								<TextBlock Text="{Binding name}"/>
-							</TreeDataTemplate >
-
-							<TreeDataTemplate   DataType="{x:Type vm:Module}" ItemsSource="{Binding ports}">
-								<TextBlock Text="{Binding name}"/>
-							</TreeDataTemplate >
-
-							<TreeDataTemplate   DataType="{x:Type vm:Port}" ItemsSource="{Binding devs}">
-								<TextBlock Text="{Binding name}"/>
-							</TreeDataTemplate >
-
-							<TreeDataTemplate   DataType="{x:Type vm:Dev}">
-								<TextBlock Text="{Binding name}"/>
-							</TreeDataTemplate >-->
-
-						</TreeView.DataTemplates>
-					</TreeView>
-						<TabStrip  Grid.Row="1" ItemsSource="{Binding NavTabiIems}"/>
-				</Grid>
-			</Border>
-
-			 <!--右侧内容区域--> 
-			<Border Background="#FFFFFF" Grid.Column="1">
-				<StackPanel >
-					<TextBlock Text ="{Binding TableTitle, Mode=TwoWay}" />
-					<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
-					<TabStrip  Margin="5" Name="TabDataCatChoose" ItemsSource="{Binding TableTabItems}" SelectionChanged = "TabCtrlSelectChanged"/>
-					<TreeDataGrid Source="{Binding Source}" CanUserResizeColumns="true" CanUserSortColumns="false">
-						<!--<TreeDataGrid.Resources>
-
-							--><!-- Defines a named template for the column --><!--
-							<DataTemplate x:Key="TextBox">
-								<TextBox />
-							</DataTemplate>
-
-						</TreeDataGrid.Resources>-->
-					</TreeDataGrid>
+			 <!--模拟状态栏--> 
+			<Border DockPanel.Dock="Bottom" Background="#E0E0E0" Height="30" Width="1280">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<TextBlock Text="{Binding Status}" Margin="5,0" VerticalAlignment="Center" />
+					<TextBlock Text="{Binding TimeStr}" Margin="5,0" VerticalAlignment="Center" />
+					<TextBlock Text="{Binding Info}" Margin="5,0" VerticalAlignment="Center" DockPanel.Dock="Right"  />
 				</StackPanel>
 			</Border>
-		</Grid>
 
-	</DockPanel>
+			 <!--主内容区--> 
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					 <!--左侧导航栏--> 
+					<ColumnDefinition Width="Auto" />
+					 <!--右侧内容区域--> 
+				</Grid.ColumnDefinitions>
+	
+				 <!--左侧导航栏--> 
+				<Border Background="#F0F0F0" Grid.Column="0" >
+					<Grid >
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<TreeView ItemsSource="{Binding project_explorer.Items}" SelectedItem="{Binding ExplorerItemSelected}">
+							<TreeView.DataTemplates>
+
+								<TreeDataTemplate   DataType="{x:Type vm:ExplorerItem}" ItemsSource="{Binding Children}">
+									<TextBlock Text="{Binding Name}"/>
+								</TreeDataTemplate >
+
+								<!--<TreeDataTemplate   DataType="{x:Type vm:ProjectGroup}" ItemsSource="{Binding projects}">
+									<TextBlock Text="{Binding name}">
+										<TextBlock.ContextMenu>
+											<ContextMenu>
+												<MenuItem Header="新建" />
+												<MenuItem Header="删除" />
+												<MenuItem Header="移动" />
+												<MenuItem Header="重命名" />
+												<MenuItem Header="另存为" />
+												<MenuItem Header="打开文件位置" />
+												<MenuItem Header="更新服务器位置" />
+											</ContextMenu>
+										</TextBlock.ContextMenu>
+									</TextBlock>
+								</TreeDataTemplate >
+
+								<TreeDataTemplate   DataType="{x:Type vm:Project}" ItemsSource="{Binding com_managers}">
+									<TextBlock Text="{Binding name}"/>
+								</TreeDataTemplate >
+
+								<TreeDataTemplate   DataType="{x:Type vm:ComManager}" ItemsSource="{Binding modules}">
+									<TextBlock Text="{Binding name}"/>
+								</TreeDataTemplate >
+
+								<TreeDataTemplate   DataType="{x:Type vm:Module}" ItemsSource="{Binding ports}">
+									<TextBlock Text="{Binding name}"/>
+								</TreeDataTemplate >
+
+								<TreeDataTemplate   DataType="{x:Type vm:Port}" ItemsSource="{Binding devs}">
+									<TextBlock Text="{Binding name}"/>
+								</TreeDataTemplate >
+
+								<TreeDataTemplate   DataType="{x:Type vm:Dev}">
+									<TextBlock Text="{Binding name}"/>
+								</TreeDataTemplate >-->
+
+							</TreeView.DataTemplates>
+						</TreeView>
+							<TabStrip  Grid.Row="1" ItemsSource="{Binding NavTabiIems}"/>
+					</Grid>
+				</Border>
+
+				 <!--右侧内容区域--> 
+				<Border Background="#FFFFFF" Grid.Column="1">
+					<StackPanel >
+						<TextBlock Text ="{Binding TableTitle, Mode=TwoWay}" />
+						<Border DockPanel.Dock="Top" Background="#C0C0C0" Height="1" />
+						<TabStrip  Margin="5" Name="TabDataCatChoose" ItemsSource="{Binding TableTabItems}" SelectionChanged = "TabCtrlSelectChanged"/>
+						<TreeDataGrid Source="{Binding Source}" CanUserResizeColumns="true" CanUserSortColumns="false">
+							<!--<TreeDataGrid.Resources>
+
+								--><!-- Defines a named template for the column --><!--
+								<DataTemplate x:Key="TextBox">
+									<TextBox />
+								</DataTemplate>
+
+							</TreeDataGrid.Resources>-->
+						</TreeDataGrid>
+					</StackPanel>
+				</Border>
+			</Grid>
+
+		</DockPanel>
+	</dialogHost:DialogHost>
 </Window>

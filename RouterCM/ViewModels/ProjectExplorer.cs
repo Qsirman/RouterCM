@@ -22,7 +22,7 @@ namespace RouterCM.ViewModels
     public class ExplorerItem
     {
         public ExplorerItemType Type { get; set; } = ExplorerItemType.Unknown;
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public ExplorerItem() { }
         public ExplorerItem(string name, ObservableCollection<ExplorerItem> children, ExplorerItemType type) { Name = name; Type = type; Children = children; }
         public ExplorerItem(string name, ExplorerItemType type) { Name = name; Type = type; }
@@ -31,7 +31,7 @@ namespace RouterCM.ViewModels
 
     public class ProjectExplorer
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public ProjectExplorer() { }
         public ProjectExplorer(string name, ObservableCollection<ExplorerItem> items) { Name = name; Items = items; }
         public ObservableCollection<ExplorerItem> Items { get; } = new();
